@@ -1,23 +1,99 @@
 aid: neutrontech-ai
+
 name: NeutronTech
-description: 'NeutronTech is a company surfaced via the API Evangelist harvest backlog (source: manual)
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: NeutronTech is an Apple-focused software company building private, on-device software for iPhone and Mac. Its products are Hubyn (a private, end-to-end encrypted team messenger and workspace that connects people by an 8-character PIN instead of a phone number), Neutron Studio (a private local-AI app for Mac that answers questions over your own documents with citations, and the company's AI research vehicle), and Neutron Health (offline clinic software, in development). The site publishes no public developer API, documentation or API reference.
+
 url: https://raw.githubusercontent.com/api-evangelist/neutrontech-ai/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:manual
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-22 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-22'
+
 modified: '2026-10-22'
+
 tags:
 - Company
-apis: []
+- Apple
+- iPhone
+- Mac
+- Privacy
+- On-Device AI
+- Local AI
+- Messaging
+- Healthcare
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
+image: https://neutrontech.ai/neutrontech-share.jpg
+
 common:
+- type: LLMsTxt
+  url: llms/neutrontech-ai-llms.txt
+- type: WellKnown
+  url: well-known/neutrontech-ai-well-known.yml
+- type: MCPServer
+  url: mcp/neutrontech-ai-mcp.yml
+- type: Hosts
+  url: hosts/neutrontech-ai-hosts.yml
+- type: IntegrationEdges
+  url: integrations/neutrontech-ai-integration-edges.yml
+- type: Vendors
+  url: vendors/neutrontech-ai-vendors.yml
 - type: Website
   url: https://neutrontech.ai
+- type: DomainSecurity
+  url: security/neutrontech-ai-domain-security.yml
+- type: Blog
+  url: https://blog.neutrontech.ai
+- type: Support
+  url: https://support.neutrontech.ai/hc/en-us
+- type: TermsOfService
+  url: https://neutrontech.ai/terms
+- type: PrivacyPolicy
+  url: https://neutrontech.ai/privacy
+- type: LinkedIn
+  url: https://linkedin.com/company/neutrontechai
+- type: X
+  url: https://x.com/neutrontechai
+- type: Email
+  url: mailto:sales@neutrontech.ai
+
+apis: []
+
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: Website https://neutrontech.ai self-identifies as NeutronTech (title "NeutronTech — Private Software for iPhone and Mac"). No developer portal, docs or API reference is linked from the site; product hosts studio./health. and www.hubyn.app are consumer product pages.
+  evidence:
+  - url: https://neutrontech.ai
+    status: 200
+  - url: https://blog.neutrontech.ai
+    status: 200
+  - url: https://neutrontech.ai/terms
+    status: 200
+  - url: https://neutrontech.ai/privacy
+    status: 200
+  - url: https://support.neutrontech.ai/hc/en-us
+    status: 200
+  - url: https://studio.neutrontech.ai
+    status: 200
+  - url: https://health.neutrontech.ai
+    status: 200
+x-enrichment:
+  date: '2026-10-22'
+  status: enriched
+  artifacts_added: 14
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

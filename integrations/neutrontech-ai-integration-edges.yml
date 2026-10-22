@@ -1,0 +1,52 @@
+generated: '2026-10-22'
+method: searched
+source:
+- https://www.hubyn.app
+- https://zapier.com/apps/neutrontech-ai/integrations
+- https://zapier.com/apps/neutrontech/integrations
+- https://n8n.io/integrations/neutrontech-ai/
+- https://n8n.io/integrations/neutrontech/
+- https://composio.dev/toolkits/neutrontech-ai
+- https://monid.ai/tools/neutrontech-ai
+checked:
+- https://neutrontech.ai
+- https://www.hubyn.app
+- https://studio.neutrontech.ai
+- https://health.neutrontech.ai
+- https://zapier.com/apps/hubyn/integrations
+- https://zapier.com/apps/neutrontech/integrations
+- https://n8n.io/integrations/hubyn/
+- https://www.make.com/en/integrations/hubyn
+- https://composio.dev/toolkits/neutrontech-ai
+- https://monid.ai/tools/neutrontech-ai
+- https://n8n.io/integrations/neutrontech-ai/
+- https://n8n.io/integrations/neutrontech/
+- https://zapier.com/apps/neutrontech-ai/integrations
+summary: null
+marketplace_apps: []
+edges:
+- partner_name: Slack
+  partner: slack
+  type: claimed
+  relationship: migration-import
+  direction: provider-built
+  evidence: https://www.hubyn.app
+  use_case: From Slack Channels become Hubyn chats and groups, with their history and files. ... For 30 to 90 days,
+    a chosen Slack channel can mirror both ways with a Hubyn space.
+- partner_name: Notion
+  partner: notion
+  type: claimed
+  relationship: migration-import
+  direction: provider-built
+  evidence: https://www.hubyn.app
+  use_case: From Notion Pages come across as shared pages.
+- partner_name: Zoom
+  partner: zoom
+  type: claimed
+  relationship: migration-import
+  direction: provider-built
+  evidence: https://www.hubyn.app
+  use_case: From Zoom Recordings are transcribed and summarized
+templates: []
+note: NeutronTech publishes no API, marketplace app or integrations page. The only named partners are the import
+  sources on the Hubyn product page, which reads exports on the user's Mac (a migration import, not an API integration).

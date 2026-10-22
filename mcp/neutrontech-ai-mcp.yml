@@ -1,0 +1,82 @@
+generated: '2026-10-22'
+method: probed
+status: gated
+source: https://blog.neutrontech.ai/wp-json/mcp (WordPress REST index lists the `mcp` namespace with routes /mcp/mcp-oauth-server and /mcp/mcp-adapter-default-server; POST initialize on both, 2026-10-22)
+name: NeutronTech blog MCP (WordPress.com MCP adapter)
+summary: 'NeutronTech serves no MCP server for its products. Its blog, blog.neutrontech.ai, is a WordPress.com-hosted
+  site (wpcomsh, Jetpack and wpcom namespaces in the REST index) whose REST API carries the WordPress MCP adapter:
+  two MCP routes under /wp-json/mcp/. The OAuth-protected route answers an anonymous POST initialize with HTTP 401,
+  code mcp_unauthorized, and a WWW-Authenticate: Bearer header whose resource_metadata points at
+  https://blog.neutrontech.ai/.well-known/oauth-protected-resource; that document (saved under well-known/) names
+  the route as its resource, lists blog.neutrontech.ai as the authorization server and advertises the single scope
+  `mcp`. The default-adapter route answers 401 rest_forbidden, gated by WordPress authentication. Neither route
+  could be introspected anonymously, so the tool list is unknown. Recorded because it is a real, reachable,
+  OAuth-gated MCP surface on a NeutronTech host -- not because NeutronTech authored it, and not because it reaches
+  Hubyn, Neutron Studio or Neutron Health, none of which publishes an API.'
+authorship: platform
+platform: WordPress.com MCP adapter
+deployment:
+  mode: remote
+  endpoint: https://blog.neutrontech.ai/wp-json/mcp/mcp-oauth-server
+  auth: oauth
+  verified: probed
+  probe: gated
+  probe_why: HTTP 401 mcp_unauthorized with WWW-Authenticate Bearer resource_metadata on an anonymous POST initialize (2026-10-22)
+  checked: '2026-10-22'
+  source: hand probe after the modular enrichment pass 2026-10-22; the pre-flight contract discovery probes the standard /mcp paths and does not look under /wp-json/
+transport: streamable-http / JSON-RPC 2.0 (WordPress REST route; POST, GET, DELETE registered)
+servers:
+- id: blog-oauth
+  name: NeutronTech blog MCP (OAuth)
+  endpoint: https://blog.neutrontech.ai/wp-json/mcp/mcp-oauth-server
+  transport: streamable-http
+  http_methods:
+  - POST
+  - GET
+  - DELETE
+  auth: oauth2
+  status: gated
+  probe:
+    fetched: '2026-10-22'
+    initialize:
+      http_status: 401
+      content_type: application/json; charset=UTF-8
+      body: '{"code":"mcp_unauthorized","message":"MCP authentication required.","data":{"status":401}}'
+      www_authenticate: Bearer realm="https://blog.neutrontech.ai", resource_metadata="https://blog.neutrontech.ai/.well-known/oauth-protected-resource"
+- id: blog-default
+  name: NeutronTech blog MCP (default adapter)
+  endpoint: https://blog.neutrontech.ai/wp-json/mcp/mcp-adapter-default-server
+  transport: streamable-http
+  http_methods:
+  - POST
+  - GET
+  - DELETE
+  auth: wordpress-session
+  status: gated
+  probe:
+    fetched: '2026-10-22'
+    initialize:
+      http_status: 401
+      content_type: application/json; charset=UTF-8
+      body: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+rfc9728:
+  endpoint: https://blog.neutrontech.ai/wp-json/mcp/mcp-oauth-server
+  metadata_url: https://blog.neutrontech.ai/.well-known/oauth-protected-resource
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-10-22'
+  http_status: 200
+  content_type: application/json; charset=UTF-8
+  file: well-known/neutrontech-ai-blog-oauth-protected-resource.json
+  document:
+    resource: https://blog.neutrontech.ai/wp-json/mcp/mcp-oauth-server
+    authorization_servers:
+    - https://blog.neutrontech.ai
+    bearer_methods_supported:
+    - header
+    scopes_supported:
+    - mcp
+tools_note: No tool list captured. Both routes refuse an anonymous initialize, so tools/list was not attempted; do NOT derive a tool list from the WordPress REST routes and store it here -- that would be a candidate manifest, and this is a probed, gated surface.
+notes:
+- No first-party NeutronTech MCP server was found. The pre-flight contract discovery probed api.neutrontech.ai, neutrontech.ai, blog.neutrontech.ai, health.neutrontech.ai and studio.neutrontech.ai for OpenAPI, AsyncAPI, GraphQL and MCP and found nothing; the enrichment contract module confirmed no contract on any host and no developer documentation.
+- The authorization-server metadata the protected-resource document points at (https://blog.neutrontech.ai/.well-known/oauth-authorization-server) was fetched by the well-known probe and is saved beside it under well-known/.
+- The blog is the only NeutronTech host carrying an MCP route; studio.neutrontech.ai and health.neutrontech.ai are product pages.

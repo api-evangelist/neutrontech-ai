@@ -1,0 +1,110 @@
+name: NeutronTech Regulatory Posture
+description: >-
+  Regulatory posture of NeutronTech (Hubyn, Neutron Studio, Neutron Health; local/on-device AI on
+  Apple Silicon Macs), read from its own Privacy Policy and Terms of Service (both "Last Updated:
+  04/19/26", HTTP 200, fetched 2026-10-22). The preflight dossier carried no legal_pages; both pages
+  were taken from the site's sitemap.xml. No trust center, subprocessor list, incident-notification,
+  accessibility, transparency-report, SBOM or Global Privacy Control language was found on either page.
+generated: '2026-10-22'
+method: searched
+source:
+  - https://neutrontech.ai/privacy
+  - https://neutrontech.ai/terms
+signals:
+  - signal: data_subject_request
+    url: https://neutrontech.ai/privacy
+    section: 12. European Privacy Rights (GDPR); 11. California Privacy Rights (CCPA)
+    note: >-
+      GDPR and CCPA rights are acknowledged and exercised by emailing support@neutrontech.ai; section
+      6 also lists self-service view/export/delete of account data. No response deadline is stated.
+    evidence:
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "Depending on your location and the legal basis for processing, you may have rights of access, rectification, erasure, restriction, portability, objection, withdrawal of consent, and complaint to a supervisory authority."
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "California residents may have the right to know, delete, correct, opt out of sale or sharing, limit the use and disclosure of sensitive personal information, and receive non-discriminatory treatment for exercising privacy rights."
+  - signal: data_retention
+    url: https://neutrontech.ai/terms
+    section: 4.2 Data Deletion; 13.3 Effect of Termination
+    note: >-
+      A concrete 30-day deletion window after account deletion or termination, with a legal-hold
+      exception. Applies to account/personal data held by NeutronTech; app content stays on device.
+    evidence:
+      - source: https://neutrontech.ai/terms
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "You have the right to delete your account and associated data at any time. Upon deletion, we will remove your personal information from our systems within 30 days, except as required by law."
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "Upon account deletion, we remove your personal information from our systems within 30 days"
+  - signal: subprocessors
+    url: https://neutrontech.ai/privacy
+    section: 8.1 Supabase
+    note: >-
+      One named service provider (Supabase) for authentication and database. This is a single named
+      vendor in the policy, not a published subprocessor list, and no change-notification mechanism is stated.
+    evidence:
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "We use Supabase for backend authentication and database services. Supabase's privacy policy applies to their handling of data."
+  - signal: data_residency
+    url: https://neutrontech.ai/privacy
+    section: 5. Data Storage and Security
+    note: >-
+      No geographic residency commitment for account data (no region is named); the residency claim is
+      architectural instead: application data and models stay on the user's device or user-controlled cloud.
+    evidence:
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "Data Location: Account data is stored on secure servers managed by Supabase"
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "Your Data: Application data, AI models, and work product remain on your device or in cloud infrastructure you control"
+  - signal: ai_transparency
+    url: https://neutrontech.ai/terms
+    section: 9.3 AI Outputs
+    note: >-
+      Discloses limits of AI output and places verification on the user (clinicians for health
+      outputs); the privacy policy states app content is not used for model training.
+    evidence:
+      - source: https://neutrontech.ai/terms
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "AI-generated outputs may be inaccurate, incomplete, biased, or inappropriate for a particular use. You are responsible for reviewing, validating, and deciding whether to use any AI-generated output."
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "We do not use your app content for advertising, data brokerage, or model training."
+  - signal: age_assurance
+    url: https://neutrontech.ai/privacy
+    section: 10. Children's Privacy
+    note: >-
+      Under-13 exclusion with a "do not knowingly collect" posture; mentions measures required by Apple
+      and state minor-protection laws but describes no specific age-verification mechanism.
+    evidence:
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "Our services are not directed to individuals under 13 years of age. We do not knowingly collect personal information from children."
+  - signal: exit_assistance
+    url: https://neutrontech.ai/terms
+    section: 13.3 Effect of Termination; 8.2 Sync, Export, and Relay Workflows
+    note: >-
+      On termination portal access ends immediately and local-device data remains the user's; the privacy
+      policy offers self-service export of account data. No assisted migration or transition period is offered.
+    evidence:
+      - source: https://neutrontech.ai/terms
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "Some Services may support optional sync, export, backup, relay, or sharing workflows. When you choose to use those features, you are responsible for selecting the destination, account, service, recipient, or connected system."
+      - source: https://neutrontech.ai/privacy
+        http_status: 200
+        fetched: '2026-10-22'
+        quote: "You may choose to export case data as Clinical JSON, or text files. Export is manual and user-initiated."
